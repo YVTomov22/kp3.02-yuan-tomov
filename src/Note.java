@@ -1,9 +1,9 @@
-// Представлява една музикална нота с тон, продължителност и сила на звука
+
 public class Note {
 
-    private int pitch;      // MIDI pitch (0-127), 0 = пауза
-    private int duration;   // продължителност в тикове
-    private int velocity;   // сила на звука (0-127)
+    private int pitch;
+    private int duration;
+    private int velocity;
 
     public Note(int pitch, int duration, int velocity) {
         this.pitch = pitch;

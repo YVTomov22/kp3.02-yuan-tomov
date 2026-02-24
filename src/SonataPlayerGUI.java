@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 
-// GUI за MIDI плеъра – прозорец с бутони Play и Stop
+
 public class SonataPlayerGUI extends JFrame {
 
     private MidiPlayer player;
@@ -19,7 +19,7 @@ public class SonataPlayerGUI extends JFrame {
         setupUI();
         loadScore();
 
-        // проверяваме периодично дали музиката е свършила
+
         statusTimer = new Timer(500, e -> checkIfFinished());
         statusTimer.start();
 
@@ -42,7 +42,7 @@ public class SonataPlayerGUI extends JFrame {
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         panel.setBackground(new Color(30, 30, 40));
 
-        // заглавие
+
         JLabel title = new JLabel("<html><center>"
                 + "<b style='font-size:15px; color:#C0C0C0;'>Лунна соната</b><br>"
                 + "<span style='font-size:11px; color:#808080;'>Бетховен – Op. 27, No. 2</span>"
@@ -50,7 +50,6 @@ public class SonataPlayerGUI extends JFrame {
         title.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(title, BorderLayout.NORTH);
 
-        // бутони
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         buttons.setOpaque(false);
 
@@ -76,7 +75,6 @@ public class SonataPlayerGUI extends JFrame {
         buttons.add(stopButton);
         panel.add(buttons, BorderLayout.CENTER);
 
-        // статус
         statusLabel = new JLabel("Готово");
         statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
         statusLabel.setForeground(new Color(120, 180, 120));

@@ -1,11 +1,10 @@
 import javax.sound.midi.*;
 import java.util.List;
 
-// Клас за създаване и възпроизвеждане на MIDI секвенции
 public class MidiPlayer {
 
-    private static final int RESOLUTION = 480; // тикове на четвъртинка
-    private static final int INSTRUMENT = 0;   // пиано
+    private static final int RESOLUTION = 480;
+    private static final int INSTRUMENT = 0;
 
     private Sequencer sequencer;
     private Sequence sequence;
@@ -19,7 +18,6 @@ public class MidiPlayer {
         }
     }
 
-    // Създава MIDI секвенция от няколко гласа (траки)
     public void createMultiTrackSequence(List<List<Note>> tracks) {
         try {
             sequence = new Sequence(Sequence.PPQ, RESOLUTION);
@@ -27,12 +25,10 @@ public class MidiPlayer {
             for (int i = 0; i < tracks.size(); i++) {
                 Track track = sequence.createTrack();
 
-                // задаване на инструмент – пиано за всички канали
                 ShortMessage prog = new ShortMessage();
                 prog.setMessage(ShortMessage.PROGRAM_CHANGE, i, INSTRUMENT, 0);
                 track.add(new MidiEvent(prog, 0));
 
-                // темпо само в първия трак (54 BPM за Adagio sostenuto)
                 if (i == 0) {
                     int microsPerBeat = 60_000_000 / 54;
                     byte[] tempoData = {
@@ -45,12 +41,10 @@ public class MidiPlayer {
                     track.add(new MidiEvent(tempo, 0));
                 }
 
-                // включване на sustain педала
                 ShortMessage sustain = new ShortMessage();
                 sustain.setMessage(ShortMessage.CONTROL_CHANGE, i, 64, 127);
                 track.add(new MidiEvent(sustain, 0));
 
-                // добавяне на нотите една след друга
                 long tick = 0;
                 for (Note note : tracks.get(i)) {
                     if (note.getPitch() > 0) {
@@ -72,7 +66,6 @@ public class MidiPlayer {
         }
     }
 
-    // Пуска музиката
     public void play() {
         if (sequence == null) {
             System.out.println("Няма заредена секвенция!");
@@ -91,19 +84,16 @@ public class MidiPlayer {
         }
     }
 
-    // Спира музиката
     public void stop() {
         if (sequencer != null && sequencer.isRunning()) {
             sequencer.stop();
         }
     }
 
-    // Проверява дали свири в момента
     public boolean isPlaying() {
         return sequencer != null && sequencer.isRunning();
     }
 
-    // Затваря ресурсите
     public void close() {
         if (sequencer != null && sequencer.isOpen()) {
             sequencer.stop();
