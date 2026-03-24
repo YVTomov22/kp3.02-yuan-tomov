@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 
-
 public class SonataPlayerGUI extends JFrame {
 
     private MidiPlayer player;
@@ -18,7 +17,6 @@ public class SonataPlayerGUI extends JFrame {
 
         setupUI();
         loadScore();
-
 
         statusTimer = new Timer(500, e -> checkIfFinished());
         statusTimer.start();
@@ -41,7 +39,6 @@ public class SonataPlayerGUI extends JFrame {
         JPanel panel = new JPanel(new BorderLayout(10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         panel.setBackground(new Color(30, 30, 40));
-
 
         JLabel title = new JLabel("<html><center>"
                 + "<b style='font-size:15px; color:#C0C0C0;'>Лунна соната</b><br>"

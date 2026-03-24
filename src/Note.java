@@ -1,4 +1,3 @@
-
 public class Note {
 
     private int pitch;
